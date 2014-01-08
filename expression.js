@@ -1,4 +1,5 @@
 var ReParse = require('reparse').ReParse;
+var porter2 = require('stem-porter');
 
 // --------------- grammar bits -------------------
 
@@ -100,10 +101,48 @@ function collectLeaves(tree, leaves, notnot) {
   return leaves;
 }
 
+// --------------- stem tree -------------------
+
+// stems tree in place
+function _stemTree(tree) {
+  if (!Array.isArray(tree)) {
+    return porter2(tree);	
+  } else {
+    var op = tree[0];
+    if (op == 'OR') {
+      tree[1] = _stemTree(tree[1]);
+	   tree[2] = _stemTree(tree[2]);
+		return tree;
+    }
+    else if (op == 'AND') {
+        tree[1] = _stemTree(tree[1]);
+	     tree[2] = _stemTree(tree[2]);
+		  return tree;
+    }
+    else if (op == 'NOT') {
+        tree[1] = _stemTree(tree[1]);
+		  return tree;
+    }
+  }
+}
+
+// returns stemmed copy of tree
+function stemTree(tree) {
+  var _tree = tree.slice(0);	// copy tree
+  _stemTree(_tree);
+  return _tree;
+}
+
 // --------------- public interface -------------------
 
-function Expression(query) {
+function Expression(query, stem) {
+    query = typeof query !== 'undefined' ? query : '';
+    stem = (typeof stem === 'boolean') ? stem : false;
+
     this.tree = new ReParse(query, true).start(expr);
+    if (stem === true) _stemTree(this.tree);
+
+	 console.log(this.tree);
 }
 
 Expression.prototype = {
