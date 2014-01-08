@@ -1,4 +1,5 @@
 Extension of https://github.com/bloomtime/boolean-expression-js to support stemming of keywords and phrases.
+
 ---------------------------------------------------------------------------
 
 Uses https://github.com/weaver/ReParse
