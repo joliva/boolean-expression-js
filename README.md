@@ -1,3 +1,6 @@
+Extension of https://github.com/bloomtime/boolean-expression-js to support stemming of keywords and phrases.
+---------------------------------------------------------------------------
+
 Uses https://github.com/weaver/ReParse
 
 Compiles and evaluates simple boolean search expressions, e.g.
@@ -13,6 +16,8 @@ assert.equal(parsed.test("Ringo George Paul John"), true);
 ```
 
 Supports parens for disambiguation. Supports AND, OR and NOT. Supports quotes for phrases. Case insensitive.
+
+Supports stemming of keywords or phrases in the expression by setting the 'stem' parameter in the Expression constructor to 'true'.
 
 See tests for more examples.
 
