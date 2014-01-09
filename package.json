@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "reparse": "~0.1.2",
-    "stem-porter": "0.0.1"
+    "stem-porter": "0.0.1",
+    "natural": "~0.1.25"
   }
 }

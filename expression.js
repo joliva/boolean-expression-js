@@ -113,7 +113,7 @@ function _stemTree(tree) {
 
     var stemText = tokenText.map(function(word) {
       return porter2(word);
-    }).join(' ');
+    }).join(' ').toLowerCase();
 	 
     return stemText;
   } else {
@@ -138,8 +138,7 @@ function _stemTree(tree) {
 // returns stemmed copy of tree
 function stemTree(tree) {
   var _tree = tree.slice(0);	// copy tree
-  _stemTree(_tree);
-  return _tree;
+  return _stemTree(_tree);
 }
 
 // --------------- public interface -------------------
